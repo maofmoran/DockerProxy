@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: server:test
+    networks:
+      red:
+    ports:
+      - "8080"
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: client:test
+    networks:
+      black:
+    ports:
+      - "8080"
+  proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    image: proxy:test
+    networks:
+      - red
+      - black
+    ports:
+      - "8080"
+
+networks:
+  red:
+    driver: overlay
+  black:
+    driver: overlay
+  
