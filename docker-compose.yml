@@ -19,8 +19,8 @@ services:
     networks:
       black:
         ipv4_address: 192.168.2.10
-    ports:
-    - "8080"
+    expose:
+    - '8080'
   proxy:
     build:
       context: ./proxy
@@ -31,8 +31,8 @@ services:
           ipv4_address: 192.168.1.150
       black:
           ipv4_address: 192.168.2.150
-    ports:
-      - "8080"
+    expose:
+      - '8080'
 
 networks:
   red:
