@@ -8,6 +8,7 @@ services:
     image: server:test
     networks:
       red:
+        ipv4_address: 192.168.1.10
     ports:
       - "8080"
   client:
@@ -17,22 +18,31 @@ services:
     image: client:test
     networks:
       black:
+        ipv4_address: 192.168.2.10
     ports:
-      - "8080"
+    - "8080"
   proxy:
     build:
       context: ./proxy
       dockerfile: Dockerfile
     image: proxy:test
     networks:
-      - red
-      - black
+      red: 
+          ipv4_address: 192.168.1.150
+      black:
+          ipv4_address: 192.168.2.150
     ports:
       - "8080"
 
 networks:
   red:
-    driver: overlay
+    ipam: 
+      driver: default
+      config: 
+        - subnet: 192.168.1.0/24
   black:
-    driver: overlay
+    ipam: 
+      driver: default
+      config: 
+        - subnet: 192.168.2.0/24
   

@@ -9,7 +9,7 @@ import (
 func main() {
 	for {
 		time.Sleep(5 * time.Second)
-		resp, err := http.Get("http://proxy:8080/ping")
+		resp, err := http.Get("http://192.168.2.150:8080/ping")
 		if err != nil {
 			log.Printf("Error: %v", err)
 		} else {
