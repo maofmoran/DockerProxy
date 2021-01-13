@@ -21,9 +21,10 @@ func handleHTTP(w http.ResponseWriter, req *http.Request, port string) {
 	println("###Incoming HTTP request to: " + req.Method + " " + req.Host + req.URL.Path + "?" + req.URL.RawQuery)
 	//Request url needs to contain http scheme(an open request)
 	//Sends request to RedGesher(They communicate with an open connection HTTP)
-	req.URL, _ = url.Parse(req.Host + req.URL.Path + "?" + req.URL.RawQuery)
+	req.URL, _ = url.Parse("http://" + "192.168.1.10:8080" + "/" + req.Host + req.URL.Path + "?" + req.URL.RawQuery)
 	req.Header.Set("X-Forwarded-Host", req.Host+":"+port)
 	req.Header.Set("X-Forwarded-For", req.RemoteAddr)
+	println("###Sending HTTP request to: " + req.Method + " " + req.URL.String())
 	resp, err := http.DefaultTransport.RoundTrip(req)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusServiceUnavailable)

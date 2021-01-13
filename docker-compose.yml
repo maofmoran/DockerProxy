@@ -36,11 +36,14 @@ services:
 
 networks:
   red:
+    #external: true
     ipam: 
       driver: default
       config: 
         - subnet: 192.168.1.0/24
+
   black:
+    #external: true
     ipam: 
       driver: default
       config: 
