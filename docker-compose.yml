@@ -19,6 +19,8 @@ services:
     networks:
       black:
         ipv4_address: 192.168.2.10
+    cap_add:
+      - NET_ADMIN #In order to allow vrrp service change interface
     expose:
     - '8080'
   proxy:
