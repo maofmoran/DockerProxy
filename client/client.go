@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os/exec"
@@ -21,9 +22,11 @@ func main() {
 		log.Print("removed 1 as dg")
 	}
 
+	fmt.Println("AVI")
+
 	for {
 		time.Sleep(5 * time.Second)
-		resp, err := http.Get("http://192.168.2.150:8080/192.168.1.10:8080/ping")
+		resp, err := http.Get("http://192.168.1.10:8080/ping")
 		if err != nil {
 			log.Printf("Error: %v", err)
 		} else {
